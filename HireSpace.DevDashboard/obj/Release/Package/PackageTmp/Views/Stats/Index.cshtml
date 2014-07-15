@@ -1,0 +1,120 @@
+﻿<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hire Space - Dashboard</title>
+    <link rel="stylesheet" href="/css/foundation.min.css">
+    <style>
+        .fullWidth {
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: initial;
+        }
+
+        .logoStyle {
+            height: 444px;
+            float: left;
+            margin-left: -14px;
+        }
+
+        .logoStyleColumn {
+            background-color: whitesmoke;
+        }
+
+        .textStyle {
+            text-align: center;
+            margin-top: 65px;
+            color: white;
+            font-size: 70px;
+        }
+
+        .good {
+            background-color: green;
+        }
+
+        .running {
+            background-color: orange;
+        }
+
+        .bad {
+            background-color: red;
+        }
+
+        .shortColumn {
+            height: 223px;
+        }
+
+        #lastRun {
+            text-align: center;
+            color: white;
+        }
+
+        #lastRunVenues {
+            text-align: center;
+            color: white;
+        }
+    </style>
+    <script src="http://js.pusher.com/2.1/pusher.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var pusher = new Pusher('df17815d522fa3b2366d');
+        var channel = pusher.subscribe('hirespacecom');
+
+        // Hirespace.com
+        channel.bind('status', function (data) {
+            if (data.status == "down") {
+                document.getElementById("hirespacecom").className = "large-5 columns shortColumn bad";
+                document.getElementById("lastRun").innerText = data.lastRun;
+            }
+            else if (data.status == "up") {
+                document.getElementById("hirespacecom").className = "large-5 columns shortColumn good";
+                document.getElementById("lastRun").innerText = data.lastRun;
+            }
+            else if (data.status == "running") {
+                document.getElementById("hirespacecom").className = "large-5 columns shortColumn running";
+                document.getElementById("lastRun").innerText = data.lastRun;
+            }
+        });
+
+        // Venues
+        var channel = pusher.subscribe('venuescom');
+        channel.bind('status', function(data) {
+            if (data.status == "down") {
+                document.getElementById("venuescom").className = "large-4 columns shortColumn bad";
+                document.getElementById("search").className = "large-12 column shortColumn bad";
+                document.getElementById("api").className = "large-12 column shortColumn bad";
+                document.getElementById("venuesapi").className = "large-12 column shortColumn bad";
+                document.getElementById("lastRunVenues").innerText = data.lastRun;
+            } else if (data.status == "up") {
+                document.getElementById("venuescom").className = "large-4 columns shortColumn good";
+                document.getElementById("search").className = "large-12 column shortColumn good";
+                document.getElementById("api").className = "large-12 column shortColumn good";
+                document.getElementById("venuesapi").className = "large-12 column shortColumn good";
+                document.getElementById("lastRunVenues").innerText = data.lastRun;
+            } else if (data.status == "running") {
+                document.getElementById("venuescom").className = "large-4 columns shortColumn running";
+                document.getElementById("lastRunVenues").innerText = data.lastRun;
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="row fullWidth">
+        <div class="large-3 columns logoStyleColumn" style="width: 416px;">
+            <img src="/images/harry-logo.png" class="logoStyle">
+        </div>
+        <div id="hirespacecom" class="large-5 columns shortColumn good" style="width: 700px;"><div class="textStyle">Live Web</div><div id="lastRun"></div></div>
+        <div id="venuescom" class="large-4 columns shortColumn good" style="width: 700px; float: left;"><div class="textStyle">Live Venues</div><div id="lastRunVenues"></div></div>
+    </div>
+    <div class="row fullWidth">
+        <div id="search" class="large-12 column shortColumn good"><div class="textStyle">Search Results</div></div>
+    </div>
+    <div class="row fullWidth">
+        <div id="api" class="large-12 column shortColumn good"><div class="textStyle">API</div></div>
+    </div>
+    <div class="row fullWidth">
+        <div id="venuesapi" class="large-12 column shortColumn good"><div class="textStyle">Venues API</div></div>
+    </div>
+
+</body>
+</html>
