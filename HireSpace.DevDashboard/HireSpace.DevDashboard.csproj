@@ -88,11 +88,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\foundation.min.css" />
+    <Content Include="css\style.css" />
     <Content Include="Global.asax" />
     <Content Include="images\harry-logo.jpg" />
     <Content Include="images\harry-logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="images\Harry.png" />
+    <Content Include="images\logo.png" />
+    <Content Include="Scripts\dashboard.js" />
     <Content Include="Scripts\foundation.min.js" />
     <Content Include="Scripts\vendor\jquery.min.js" />
     <Content Include="Scripts\vendor\modernizr.min.js" />
