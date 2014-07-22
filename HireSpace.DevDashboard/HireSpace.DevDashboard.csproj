@@ -110,7 +110,6 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
-    <Content Include="hirespacedevdashboard.azurewebsites.net.PublishSettings" />
     <None Include="Properties\PublishProfiles\hirespacedevdashboard - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\hirespacedevdashboard - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
